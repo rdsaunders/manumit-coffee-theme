@@ -42,7 +42,7 @@
 	<input type="hidden" name="{{ variant.id }}" value="{{ variant.inventory_quantity }}">
 {% endfor %}
 
-<div class="product-radios hidden" {% unless product.variants.size == 1 %}hidden{% endunless %}>
+<div class="product-radios hidden" {% unless product.variants.size > 1 %}hidden{% endunless %}>
 
 {%- for option in product.options_with_values -%}
 
