@@ -44,41 +44,43 @@
 
 <div class="product-radios hidden" {% unless product.variants.size > 1 %}hidden{% endunless %}>
 
-{%- for option in product.options_with_values -%}
+	<span class="hidden">{% product.variants.size %}</span>
 
-		<fieldset id="ProductSelect-option-{{ forloop.index0 }}" name="{{ option.name | handleize }}" class="form__row">
-			<legend class="form__label">
-				Choose your {{ option.name | escape }}
-			</legend>
-			<div class="form__row flex-grid flex-grid--fill flex-grid--even {% unless option.values.size <= 3 %}flex-grid--3-up{% endunless %}">
-			{%- for value in option.values -%}
+	{%- for option in product.options_with_values -%}
 
-				{%- assign variant_label_state = true -%}
+			<fieldset id="ProductSelect-option-{{ forloop.index0 }}" name="{{ option.name | handleize }}" class="form__row">
+				<legend class="form__label">
+					Choose your {{ option.name | escape }}
+				</legend>
+				<div class="form__row flex-grid flex-grid--fill flex-grid--even {% unless option.values.size <= 3 %}flex-grid--3-up{% endunless %}">
+				{%- for value in option.values -%}
 
-				{%- if product.options.size == 1 -%}
-					{%- unless product.variants[forloop.index0].available -%}
-						{%- assign variant_label_state = false -%}
-					{%- endunless -%}
-				{%- endif -%}
+					{%- assign variant_label_state = true -%}
 
-				<div class="radio flex-grid__item">
-					<input type="radio"
-						{% if option.selected_value == value %} checked="checked"{% endif %}
-						{% unless variant_label_state %} disabled="disabled"{% endunless %}
-						value="{{ value | escape }}"
-						data-index="option{{ forloop.index }}"
-						name="{{ option.name | handleize }}"
-						id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
-					<label for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
-						{{ value | escape }}
-					</label>
+					{%- if product.options.size == 1 -%}
+						{%- unless product.variants[forloop.index0].available -%}
+							{%- assign variant_label_state = false -%}
+						{%- endunless -%}
+					{%- endif -%}
+
+					<div class="radio flex-grid__item">
+						<input type="radio"
+							{% if option.selected_value == value %} checked="checked"{% endif %}
+							{% unless variant_label_state %} disabled="disabled"{% endunless %}
+							value="{{ value | escape }}"
+							data-index="option{{ forloop.index }}"
+							name="{{ option.name | handleize }}"
+							id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
+						<label for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
+							{{ value | escape }}
+						</label>
+					</div>
+				{%- endfor -%}
+
 				</div>
-			{%- endfor -%}
+			</fieldset>
 
-			</div>
-		</fieldset>
-
-{%- endfor -%}
+	{%- endfor -%}
 
 </div>
 
