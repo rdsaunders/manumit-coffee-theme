@@ -1,0 +1,101 @@
+<div class="section tab-block">
+
+	<div class="flex-grid flex-grid--responsive">
+
+		<div class="flex-grid__item">
+
+			<h2 class="heading heading--h2 tab-block__heading">{{ section.settings.heading | newline_to_br }}</h2>
+
+		</div>
+
+		<div class="flex-grid__item">
+
+			<div class="tabs js-tabs">
+			
+				<ul role="tablist" class="tabs__tab-list">
+						{% for block in section.blocks %}
+						<li role="presentation"><a href="#section{{ forloop.index }}" role="tab" aria-controls="section{{ forloop.index }}" class="tabs__trigger js-tab-trigger">{{ block.settings.name }}</a></li>
+						{% endfor %}
+				</ul>
+
+				{% for block in section.blocks %}
+					
+				<section id="section{{ forloop.index }}" role="tabpanel" class="tabs__panel js-tab-panel">
+						<h3 class="heading heading--h3">{{ block.settings.name }}</h3>
+						<p>({{ block.settings.from }})</p>
+						<div class="tabs__content stack">
+							{{ block.settings.text }}
+						</div>
+				</section>
+
+				{% endfor %}
+
+			</div>
+
+		</div>
+
+		
+	</div>
+
+	<div class="flex-grid">
+
+		<div class="flex-grid__item">
+			{% assign img_url = section.settings.image | img_url: '832x' %}
+			<img src="{{ img_url }}" alt="{{ section.settings.alt }}" class="tab-block__img" loading="lazy">
+		</div>
+
+	</div>
+</div>
+<!-- /.tab-block.section -->
+
+{% schema %}
+{
+  "name": "Roaster Block",
+	"settings":  [
+		{
+			"id": "heading",
+			"type": "textarea",
+			"label": "Heading"
+		},
+		{
+			"id": "image",
+			"type": "image_picker",
+			"label": "Choose an image"
+		},
+		{
+			"id": "alt",
+			"type": "text",
+			"label": "Alt text"
+		}
+	],
+  "blocks": [
+    {
+      "type": "roaster",
+      "name": "Add Roaster",
+      "settings": [
+        {
+					"id": "name",
+					"type": "text",
+					"label": "Name"
+				},
+				{
+					"id": "from",
+					"type": "text",
+					"label": "Region roaster from"
+				},
+				{
+					"id": "text",
+					"type": "richtext",
+					"label": "Text"
+				}
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

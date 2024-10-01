@@ -1,0 +1,35 @@
+{% if product.images.size > 1 %}
+	
+	<div class="gallery product__imgs">
+	
+		<div id="product-gallery" class="gallery__imgs">
+
+			{% for image in product.images %}
+				<figure class="product__img">
+					<img src="{{ image | img_url: '2048x2048' }}" alt="{{ image.alt | escape }}" loading="lazy">
+				</figure>
+			{% endfor %}
+		
+		</div>
+
+		<div id="product-thumbnails" class="gallery__nav flex-grid">
+
+			{% for image in product.images %}
+				<figure class="gallery__thumb">
+					<img src="{{ image | img_url: 'small' }}" alt="{{ image.alt | escape }}" loading="lazy">
+				</figure>
+			{% endfor %}
+
+		</div>
+	
+	</div>
+
+	{% else %}
+
+		<div class="product__imgs">
+			<figure class="product__img">
+				<img src="{{ featured_image | img_url: '704x' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg" loading="lazy">
+			</figure>
+		</div>
+
+		{% endif %}

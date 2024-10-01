@@ -1,0 +1,16 @@
+{% comment %} Is embedded insie `site-nav.liquid`, which is why I don't use a `nav` tag here {% endcomment %}
+<div class="account-nav">
+{% if shop.customer_accounts_enabled %}
+	{% if customer %}
+		<a href="/account">My account</a>
+		{{ 'log out'  | customer_logout_link }}
+	{% else %}
+		{{ 'log in ' | customer_login_link }}
+		{{ 'register' | customer_register_link }}
+	{% endif %}
+{% endif %}
+
+	{% render 'cart-link' | class: 'hidden--mob' %}
+
+</div>
+<!-- /.mobile-account-nav -->

@@ -1,0 +1,54 @@
+{% comment %} 
+
+	REQUIRES: 
+	* product
+
+ {% endcomment %}
+
+{% capture type %}
+	{%- case prod_type | downcase -%}
+		{%- when 'coffee' or 'wholesale coffee' -%}
+		coffees
+		{%- when 'coffee plans' or 'wholesale coffee plans' -%}
+		plans
+		{%- when 'accessories' -%}
+		accessories
+		{%- else -%}
+		products
+	{%- endcase -%}
+{% endcapture %}
+
+{% assign productType = product.type | handle %}
+
+{% assign collection = collections[productType].products %}
+
+{% if collection.size > 1 %}
+
+<h2 class="heading heading--h2">Other {{ type }}</h2>
+
+<div class="grid-crop section">
+
+	<div class="flex-grid flex-grid--responsive flex-grid--products">
+
+	
+		{% for prod in collection limit:4 %}
+		
+		{% unless prod.id == product.id %}
+		<div class="flex-grid__item">
+
+			<article class="product-card text-center stack">
+					{% unless prod.available %}<br><strong>sold out</strong>{% endunless %}
+					<a href="{{ prod.url | within: collection }}">
+						<img src="{{ prod.featured_image.src | img_url: 'large' }}" alt="{{ prod.featured_image.alt | escape }}" loading="lazy">
+					</a>	
+					<h3  class="heading heading--h3"><a href="{{ prod.url | within: collection }}">{{ prod.title }}</a></h3>
+					<p>From {{ prod.price | money }}</p>
+			</article>
+		</div>
+		{% endunless %}
+		{% endfor %}
+	
+	</div>
+
+</div>
+{% endif %}

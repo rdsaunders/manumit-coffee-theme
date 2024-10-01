@@ -1,0 +1,10 @@
+<header class="site-header">
+
+	<a href="/" class="site-header__logo" aria-label="{{ 'general.navigation.home_label' | t }}">{{ 'logo.svg' | asset_url | img_tag }}</a>
+
+	{% render 'site-nav' %}
+
+	{% render 'cart-link' | class: 'hidden--desk' %}
+
+</header>
+<!-- /.site-header -->

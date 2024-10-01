@@ -1,0 +1,28 @@
+{% render 'short-text', title: section.settings.title, text: section.settings.text %}
+
+
+{% schema %}
+  {
+		"name": "Slavery Short Text",
+		"class": "short-text__wrap",
+    "settings": [
+			{
+				"id": "title",
+        "type": "text",
+        "label": "Heading"
+			},
+			{
+        "id": "text",
+        "type": "richtext",
+        "label": "Text"
+      }
+
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,25 @@
+{%- if template == 'collection' or template == 'product' -%}
+{%- assign t = template | split: '.' | first -%}
+
+<div class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+	{%- case t -%}
+		{%- when 'collection' -%}
+			{% assign coll = collection.handle | downcase %}
+			{% if coll contains 'wholesale' %}
+				{% assign url = '/pages/for-business' %}
+			{% else %}
+				{% assign url = '/pages/shop' %}
+			{% endif %}
+			<a class="breadcrumbs__link" href="{{ url }}">Back to shop</a>
+		{%- when 'product' -%}
+			{%- if collection.url -%}
+				<a class="breadcrumbs__link" href="{{ collection.url }}">Back to {{ collection.title | downcase }}</a>
+				{% else %}
+				<a class="breadcrumbs__link" href="/pages/shop">Back to shop</a>
+			{%- endif -%}
+		{%- else -%}
+			
+	{%- endcase -%}
+</div>
+
+{%- endif -%}

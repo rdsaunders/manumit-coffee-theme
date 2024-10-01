@@ -1,0 +1,42 @@
+<article class="block cta-block">
+
+	<h2 class="heading heading--h2">{{ section.settings.title }}</h2>
+
+	<p>{{ section.settings.text }}</p>
+
+	<a href="{{ section.settings.url }}" class="btn">{{ section.settings.cta_text }}</a>
+
+</article>
+
+
+{% schema %}
+  {
+    "name": "CTA Block",
+    "settings": [
+			{
+				"id": "title",
+        "type": "text",
+        "label": "Heading",
+        "default": "Title"
+			},
+			{
+        "id": "url",
+        "type": "url",
+        "label": "Button link"
+			},
+			{
+        "id": "cta_text",
+        "type": "text",
+        "label": "Button text",
+        "default": "Change me"
+      }
+
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,31 @@
+<footer class="site-footer full-bleed section section--invert">
+
+	<div class="wrapper stack">
+
+		<nav class="footer-nav">
+			{% for link in linklists.footer.links %}
+
+			<a href="{{ link.url }}" class="footer-nav__link{% if link.url == page.url or template == 'index' and link.title == 'Home' %} is-active{% endif %}">{{ link.title }}</a>
+
+			{% endfor %}
+
+		</nav>
+
+		<p class="smallprint">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} | {% for link in linklists.["legal-menu"].links %}<a href="{{ link.url }}">{{ link.title }}</a>{% unless forloop.last %} | {% endunless %}{% endfor %}</p>
+
+		<div class="flex-grid flex-grid--v-center follow-nav">
+		
+			{% if settings.instagram != '' %}
+			<a href="https://instagram.com/{{ settings.instagram }}"><img src="{{ 'icon-instagram.svg' | asset_url }}" alt="Instagram"></a>
+			{% endif %}
+			{% if settings.facebook != '' %}
+			<a href="{{ settings.facebook }}"><img src="{{ 'icon-facebook.svg' | asset_url }}" alt="Facebook"></a>
+			{% endif %}
+			{% if settings.twitter != '' %}
+			<a href="https://twitter.com/{{ settings.twitter }}"><img src="{{ 'icon-twitter.svg' | asset_url }}" alt="Twitter"></a>
+			{% endif %}
+		</div>
+
+	</div>
+
+</footer>

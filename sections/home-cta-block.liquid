@@ -1,0 +1,83 @@
+<div class="section section--alt full-bleed">
+
+	<div class="wrapper">
+
+		<div class="flex-grid flex-grid--responsive flex-grid--v-center">
+
+			<div class="flex-grid__item flex-grid__item--cols-4">
+
+				<img src="{{ section.settings.img | img_url: '700x' }}" alt="{{ section.settings.img_url }}" loading="lazy">
+				<br>
+				<br>
+				<br>
+				<br>
+
+			</div>
+
+			<div class="flex-grid__item flex-grid__item--cols-6">
+
+				<div class="flex-grid flex-grid--responsive flex-grid--2-col-wrap" style="--modifier: calc(40em - 100%);">
+
+					{% for block in section.blocks %}
+					<div class="flex-grid__item">
+						{% render 'product-cta', title: block.settings.title, text: block.settings.text, cta_link:  block.settings.btn_link, cta_text:  block.settings.btn_text, level: 'h3', divider: true %}
+					</div>
+					{% endfor %}
+					
+				</div>
+
+			</div>
+			
+		</div>
+
+	
+	</div>
+
+</div>
+<!-- /.section -->
+
+{% schema %}
+{
+  "name": "CTA Block",
+	"settings":  [
+		{
+			"id": "img",
+			"type": "image_picker",
+			"label": "Choose image"
+		},
+		{
+			"id": "img_alt",
+			"type": "text",
+			"label": "Describe the image (or copy text)"
+		}
+	],
+  "blocks": [
+    {
+      "type": "cta",
+      "name": "Add CTA",
+      "settings": [
+        {
+					"id": "title",
+					"type": "text",
+					"label": "Heading"
+				},
+				{
+					"id": "text",
+					"type": "textarea",
+					"label": "Text"
+				},
+				{
+					"id": "btn_link",
+					"type": "url",
+					"label": "Choose link"
+				},
+				{
+					"id": "btn_text",
+					"type": "text",
+					"label": "Button text"
+				}
+      ]
+    }
+  ]
+}
+{% endschema %}

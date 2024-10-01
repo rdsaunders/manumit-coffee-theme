@@ -1,0 +1,63 @@
+<div class="full-bleed campaign-strip">
+
+	<div class="wrapper">
+	
+		<div class="flex-grid flex-grid--responsive">
+
+			<div class="flex-grid__item">
+
+				<div class="campaign-strip__img-wrap">
+
+					<img src="{{ section.settings.img | img_url : '740x' }}" alt="{{ section.settings.alt_text }}" class="campaign-strip__img" loading="lazy">
+
+				</div>
+
+			</div>
+
+			<div class="flex-grid__item">
+
+				<div class="stack campaign-strip__content">
+					<img src="{{ 'logo-stamp-pink.svg' | asset_url }}" alt="Slavery Free Stamp" class="campaign-strip__icon">
+
+					<h2 class="heading heading--h2">{{ section.settings.title }}</h2>
+
+				</div>
+
+			</div>
+
+		</div>
+	
+	</div>
+
+</div>
+<!-- /.campaign-strip -->
+
+
+{% schema %}
+  {
+    "name": "Campaign Strip",
+    "settings": [
+			{
+				"id": "title",
+        "type": "text",
+        "label": "Heading"
+			},
+			{
+				"id": "img",
+        "type": "image_picker",
+        "label": "Image"
+			},
+			{
+				"id": "img_alt",
+        "type": "text",
+        "label": "Describe the image"
+			}
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

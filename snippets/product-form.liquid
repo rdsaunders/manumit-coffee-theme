@@ -1,0 +1,109 @@
+{% comment %} 
+
+	REQUIRES:
+
+	* product
+
+{% endcomment %}
+
+<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="stack product__form" data-productid="{{ product.id }}">
+
+<div class="rc-widget-injection-parent"></div>
+
+
+<input type="hidden" name="js-product" id="js-product" value='{{ product | json | escape }}'>
+<input type="hidden" name="js-money-format" id="js-money-format" value="{{ shop.money_format }}">
+<input type="hidden" name="sold-out-msg" id="sold-out-msg" value="{{ 'messages.product.sold_out' | t }}">
+{% assign number = '####' %}
+<input type="hidden" name="low-stock-msg" id="low-stock-msg" value="{{ 'messages.product.low_stock' | t: number: number }}">
+<input type="hidden" name="low-stock-threshold" id="low-stock-threshold" value="{{ settings.low_stock_threshold }}">
+<input type="hidden" name="max-qty" id="max-qty" value="{{ settings.max_qty }}">
+
+
+{% comment %} HIDE IF JS {% endcomment %}
+<select name="id" id="productSelect" data-productid="{{product.id}}">
+	{% for variant in product.variants %}
+		{% if variant.available %}
+			<option value="{{ variant.id }}">
+				{{ variant.title }} - {{ variant.price | money_with_currency }}
+			</option>
+		{% else %}
+			<option disabled="disabled">
+				{{ variant.title }} - sold out
+			</option>
+		{% endif %}
+	{% endfor %}
+</select>
+
+<div id="variant_feedback"></div>
+<div id="variant_available"></div>
+
+{% for variant in product.variants %}
+	<input type="hidden" name="{{ variant.id }}" value="{{ variant.inventory_quantity }}">
+{% endfor %}
+
+<div class="product-radios hidden" {% unless product.variants.size > 1 %}hidden{% endunless %}>
+
+{%- for option in product.options_with_values -%}
+
+		<fieldset id="ProductSelect-option-{{ forloop.index0 }}" name="{{ option.name | handleize }}" class="form__row">
+			<legend class="form__label">
+				Choose your {{ option.name | escape }}
+			</legend>
+			<div class="form__row flex-grid flex-grid--fill flex-grid--even {% unless option.values.size <= 3 %}flex-grid--3-up{% endunless %}">
+			{%- for value in option.values -%}
+
+				{%- assign variant_label_state = true -%}
+
+				{%- if product.options.size == 1 -%}
+					{%- unless product.variants[forloop.index0].available -%}
+						{%- assign variant_label_state = false -%}
+					{%- endunless -%}
+				{%- endif -%}
+
+				<div class="radio flex-grid__item">
+					<input type="radio"
+						{% if option.selected_value == value %} checked="checked"{% endif %}
+						{% unless variant_label_state %} disabled="disabled"{% endunless %}
+						value="{{ value | escape }}"
+						data-index="option{{ forloop.index }}"
+						name="{{ option.name | handleize }}"
+						id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
+					<label for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
+						{{ value | escape }}
+					</label>
+				</div>
+			{%- endfor -%}
+
+			</div>
+		</fieldset>
+
+{%- endfor -%}
+
+</div>
+
+
+<div class="flex-grid flex-grid--split">
+
+	<div class="flex-grid__item flex-grid__item--v-center">
+		<span class="heading heading--h3 js-price">{{ current_variant.price | money }} </span> {% if product.type | downcase == 'coffee plans' or product.type | downcase == 'wholesale coffee plans' %}&nbsp;(regular){% endif %}
+	</div>
+
+	<div class="flex-grid__item">
+		<div class="flex-grid flex-grid--v-center">
+			<label for="Quantity" class="form__label text-caps">Qty</label>
+			<select id="Quantity" name="quantity" class="form__select form__field">
+				{% for n in (1..settings.max_qty) %}
+				<option value="{{ n }}">{{ n }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+
+</div>
+
+<div id="message" class="flash-msg" aria-live="polite"></div>
+
+<button type="submit" class="btn btn--primary btn--full" name="add" id="AddToCart">Add to basket</button>
+
+</form>	

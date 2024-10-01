@@ -1,0 +1,34 @@
+<article class="block share-cta-block">
+
+	<h2 class="heading heading--h2">{{ section.settings.title }}</h2>
+
+	<div>{{ section.settings.text }}</div>
+
+</article>
+
+
+{% schema %}
+  {
+    "name": "Share CTA Block",
+    "settings": [
+			{
+				"id": "title",
+        "type": "text",
+        "label": "Heading (@ symbol will be added)",
+        "default": "Title"
+			},
+			{
+				"id": "text",
+				"type": "richtext",
+				"label": "Enter your content here",
+				"default": "<p>Enter some content</p>" 
+			}
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

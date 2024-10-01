@@ -1,0 +1,104 @@
+<div class="home-hero">
+
+	<div class="section">
+
+			<div class="flex-grid flex-grid--v-center flex-grid--responsive">
+
+				<div class="flex-grid__item flex-grid__item--cols-6">
+					<h1 class="heading heading--h1">{{ section.settings.title }}</h1>
+				</div>
+
+				<div class="flex-grid__item flex-grid__item--cols-4">
+					<figure class="home-hero__img">
+						<img src="{{ section.settings.img_1 | img_url : '740x' }}" alt="{{ section.settings.img_1_alt }}" loading="lazy">
+					</figure>
+				</div>
+
+			</div>
+
+	</div>
+
+	<a href="{{ section.settings.url }}" class="btn home-hero__cta">{{ section.settings.btn_text }}</a>
+
+	<div class="section full-bleed home-hero__offset-bg">
+
+		<div class="wrapper">
+
+			<div class="flex-grid flex-grid--responsive flex-grid--reverse">
+
+				<div class="flex-grid__item flex-grid__item--cols-4">
+
+					<div class="grid-crop grid-crop--reverse grid-crop--80">
+						<div class="home-hero__copy">{{ section.settings.text }}</div>
+					</div>
+
+				</div>
+
+				<div class="flex-grid__item flex-grid__item--cols-6 flex-grid--split">
+					<figure class="home-hero__img-2">
+						<img src="{{ section.settings.img_2 | img_url : '740x' }}" alt="{{ section.settings.img_2_alt }}" loading="lazy">
+					</figure>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+<!-- /.home-hero -->
+
+{% schema %}
+  {
+    "name": "Home Hero",
+    "settings": [
+			{
+				"id": "title",
+        "type": "text",
+        "label": "Heading"
+			},
+			{
+				"id": "text",
+        "type": "richtext",
+        "label": "Copy"
+			},
+			{
+				"id": "img_1",
+        "type": "image_picker",
+        "label": "First image"
+			},
+			{
+				"id": "img_1_alt",
+        "type": "text",
+        "label": "Describe first image"
+			},
+			{
+				"id": "img_2",
+        "type": "image_picker",
+        "label": "Second image"
+			},
+			{
+				"id": "img_2_alt",
+        "type": "text",
+        "label": "Describe second image"
+			},
+			{
+        "id": "url",
+        "type": "url",
+        "label": "Button link"
+			},
+			{
+        "id": "btn_text",
+        "type": "text",
+        "label": "Button text"
+      }
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

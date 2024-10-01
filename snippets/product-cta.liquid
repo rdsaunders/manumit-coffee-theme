@@ -1,0 +1,19 @@
+<article class="product-cta {% if divider %}product-cta--divider{% endif %}">
+
+	<div class="stack product-cta__inner">
+
+		{% if img %}
+			<a href="{{ cta_link }}"><img src="{{ img }}" alt="{% if title %}{{ title }}{% endif %}" loading="lazy" ></a>
+		{% else %}
+			{% if title %}
+			<{{level}} class="heading heading--{{ level }}">{{ title }}</{{level}}>
+			{% endif %}
+		{% endif %}
+
+		<p>{{ text }}</p>
+
+		<a href="{{ cta_link }}" class="btn btn--center">{{ cta_text }}</a>
+
+	</div>
+
+</article>

@@ -1,0 +1,56 @@
+<div class="section">
+	<div class="flex-grid flex-grid--responsive flex-grid--ctas">
+
+		{% for block in section.blocks %}
+			<div class="flex-grid__item">
+
+				{% assign url = block.settings.img | img_url: '560x' %}
+
+				{% render 'product-cta', title: block.settings.title, text: block.settings.text, cta_link: block.settings.btn_link, cta_text: block.settings.btn_text, level: 'h2', img: url, divider: true %}
+
+			</div>
+		{% endfor %}
+		
+	</div>
+</div>
+<!-- /.section -->
+
+{% schema %}
+{
+  "name": "Wholesale Collections",
+  "blocks": [
+    {
+      "type": "cta",
+      "name": "Add CTA",
+      "settings": [
+				{
+					"id": "img",
+					"type": "image_picker",
+					"label": "Image"
+				},
+				{
+					"id": "text",
+					"type": "textarea",
+					"label": "Text"
+				},
+        {
+					"id": "title",
+					"type": "text",
+					"label": "Describe the image"
+				},
+				{
+					"id": "btn_link",
+					"type": "url",
+					"label": "Choose link"
+				},
+				{
+					"id": "btn_text",
+					"type": "text",
+					"label": "Button text"
+				}
+      ]
+    }
+  ]
+}
+{% endschema %}
+

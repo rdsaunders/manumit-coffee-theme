@@ -1,0 +1,29 @@
+<div class="section">
+
+	<div class="grid-crop grid-crop--80">
+
+		{% render 'follow-block', content: section.settings.content %}
+
+	</div>
+
+</div>
+<!-- /.section -->
+
+{% schema %}
+  {
+    "name": "Follow Block",
+    "settings": [
+			{
+				"id": "content",
+        "type": "richtext",
+        "label": "Content"
+			}
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

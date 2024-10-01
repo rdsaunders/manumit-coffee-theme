@@ -1,0 +1,43 @@
+<div class="section section--alt full-bleed">
+
+	<div class="wrapper">
+
+		<div class="grid-crop grid-crop--80">
+		
+			<div class="flex-grid flex-grid--responsive">
+
+				<div class="flex-grid__item">
+
+					{% capture title %}
+
+						{% assign prod_type = product.type | downcase %}
+
+						{% case prod_type %}
+							{% when 'coffee' or 'wholesale coffee' %}
+								About this coffee
+							{% when  'coffee plans' or 'wholesale coffee plans' %}
+								About this plan
+							{% else %}
+								About this product
+						{% endcase %}
+
+					{% endcapture %}
+
+					{% render 'short-text', title: title, text: product.description %}
+
+				</div>
+
+				<div class="flex-grid__item">
+
+					{% section 'slavery-short-text' %}
+
+				</div>
+
+			</div>
+		
+		</div>
+	
+	</div>
+
+</div>
+<!-- /.section -->

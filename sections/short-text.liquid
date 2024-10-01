@@ -1,0 +1,35 @@
+<article class="short-text">
+
+	<h2 class="heading heading--h2">{{ section.settings.title }}</h2>
+
+	<div class="rte">{{ section.settings.text }}</div>
+
+</article>
+
+
+{% schema %}
+  {
+    "name": "Short Text",
+    "settings": [
+			{
+				"id": "title",
+        "type": "text",
+        "label": "Heading",
+        "default": "Title"
+			},
+			{
+        "id": "text",
+        "type": "richtext",
+        "label": "Text",
+        "default": "<p>Enter content here</p>"
+      }
+
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

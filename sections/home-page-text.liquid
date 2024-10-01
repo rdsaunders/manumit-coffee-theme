@@ -1,0 +1,54 @@
+<div class="section">
+
+	<div class="grid-crop grid-crop--reverse">
+		<div class="flex-grid flex-grid--responsive">
+
+		{% for block in section.blocks %}
+
+			<div class="flex-grid__item">
+
+				{% render 'short-text', title: block.settings.title, text: block.settings.text %}
+
+			</div>
+
+		{% endfor %}
+
+		</div>
+	
+	</div>
+
+</div>
+<!-- /.section -->
+
+{% schema %}
+{
+  "name": "Home Page Text Blocks",
+	"max_blocks": 3,
+  "blocks": [
+    {
+      "type": "short_text",
+      "name": "Add Short Text",
+      "settings": [
+        {
+					"id": "title",
+					"type": "text",
+					"label": "Heading",
+					"default": "Title"
+				},
+				{
+					"id": "text",
+					"type": "richtext",
+					"label": "Text",
+					"default": "<p>Enter content here</p>"
+				}
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

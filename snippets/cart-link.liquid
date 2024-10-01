@@ -1,0 +1,7 @@
+<a href="/cart" class="cart-link {{ class }}">
+		<svg viewBox="0 0 29 22">
+			<title>Cart</title>
+				<path d="M15.8855766,0 L15.885,5.986 L28.7711532,5.98632812 L25.0788456,21.9863281 L3.69230769,21.9863281 L-2.13162821e-14,5.98632812 L12.885,5.986 L12.8855766,0 L15.8855766,0 Z M24.9995766,8.986 L3.77057662,8.986 L6.07857662,18.986 L22.6915766,18.986 L24.9995766,8.986 Z"></path>
+		</svg>
+		{% if cart.item_count > 0 %}<span class="cart-link__count">{{ cart.item_count }}</span>{% endif %}
+	</a>

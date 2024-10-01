@@ -1,0 +1,20 @@
+{% comment %} 
+	REQUIRES:
+
+	* product
+
+ {% endcomment %}
+
+{% assign prodType = product.type | downcase %}
+
+{% case prodType %}
+
+	{% when 'coffee' %}
+
+	{% section 'plans-cta-block' %}
+
+	{% else %}
+
+	{% section 'coffee-cta-block' %}
+		
+{% endcase %}
