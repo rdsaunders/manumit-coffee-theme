@@ -44,7 +44,7 @@
 
 <div class="product-radios hidden" {% unless product.variants.size > 1 %}hidden{% endunless %}>
 
-  	<span class="hidden"></span>
+  	<p>Number of variants: {{ product.variants.size }}</p>
 
 
 {%- for option in product.options_with_values -%}
