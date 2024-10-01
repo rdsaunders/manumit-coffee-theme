@@ -44,9 +44,6 @@
 
 <div class="product-radios hidden" {% unless product.variants.size > 1 %}hidden{% endunless %}>
 
-  	<p>Number of variants: {{ product.variants.size }}</p>
-
-
 {%- for option in product.options_with_values -%}
 
 		<fieldset id="ProductSelect-option-{{ forloop.index0 }}" name="{{ option.name | handleize }}" class="form__row">
