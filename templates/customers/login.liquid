@@ -1,0 +1,43 @@
+<!-- /templates/customers/login.liquid -->
+
+<div class="section">
+
+	{% form 'customer_login', class: 'form' %} 
+
+		<div class="stack login">
+
+		{{ form.errors | default_errors }}
+
+			<h1 class="heading heading--h2 text-center">Login</h1>
+
+			<div class="form__row">
+
+				<label for="customer_email" class="form__label">Email Address</label>
+				<input type="email" name="customer[email]" class="form__field" id="customer_email" />
+
+			</div>
+
+			<div class="form__row">
+				
+				<label for="customer_password" class="form__label">Password</label>
+				<input type="password" name="customer[password]" class="form__field" id="customer_password" />
+
+			</div>
+
+			<button type="submit" class="btn btn--full">Login</button>
+
+			<div class="form__row">
+
+				<p>
+					<a href="/pages/recover-password">Forgotten password?</a> or <a href="/account/register">Create an account</a>
+				</p>
+
+			</div>
+
+		</div>
+		<!-- /.stack -->
+
+	{% endform %} 
+
+</div>
+<!-- /.section -->

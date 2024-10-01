@@ -1,0 +1,34 @@
+<!-- /templates/customers/activate_account.liquid -->
+
+<div class="section">
+
+	{% form 'reset_customer_password', class: 'form' %} 
+
+		<div class="stack login">
+
+			{{ form.errors | default_errors }}
+
+			<h1 class="heading heading--h2 text-center">Activate your account</h1>
+
+			<div class="form__row">
+
+				<label for="password" class="form__label">Your password:</label>
+				<input id="password" type="password" name="customer[password]" class="form__field">
+
+			</div>
+
+			<div class="form__row">
+
+				<label for="password_confirmation" class="form__label">Confirm password</label>
+				<input id="password_confirmation" type="password" name="customer[password_confirmation]" class="form__field">
+
+			</div>
+
+			<button type="submit" class="btn btn--full">Activate Account</button>
+
+		</div>
+
+	{% endform %} 
+
+</div>
+<!-- /.section -->

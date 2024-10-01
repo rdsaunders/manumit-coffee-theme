@@ -1,0 +1,55 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+{% assign prod_type = product.type | downcase %}
+{% if  prod_type == 'wholesale coffee' or prod_type == 'wholesale coffee plans' %}
+	<div class="flash-msg is-active">
+		<p>Discounts available for regular and bulk orders. Please <a href="/pages/contact">contact us</a></p>
+	</div>
+{% endif %}
+
+<div class="product">
+
+	<div class="section stack">
+
+		<div class="flex-grid flex-grid--responsive">
+
+			<div class="flex-grid__item flex-grid__item--cols-6">
+
+			{% render 'product-images', product , featured_image: featured_image %}
+
+
+			</div>
+
+
+			<div class="flex-grid__item flex-grid__item--cols-4">
+
+				<h1 class="heading heading--h2 product__title">{{ product.title }}</h1>
+
+				{% render 'product-form' , product: product, current_variant: current_variant  %}
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- /.section -->
+
+	{% render 'product-info', product: product %}
+
+	<div class="section">
+	
+		{% render 'related-products', product: product %}
+	
+	</div>
+	<!-- /.section -->
+
+	<div class="section section--alt full-bleed">
+
+		{% render 'product-cta-banner', product: product %}
+
+	</div>
+	<!-- /.section -->
+
+</div>

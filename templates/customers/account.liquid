@@ -1,0 +1,78 @@
+<!-- /templates/customers/account.liquid -->
+
+<div class="section">
+
+	<div class="stack">
+
+	<div class="flex-grid flex-grid--responsive flex-grid--baseline">
+		<h1 class="heading heading--h2">Hello, {{ customer.first_name }}</h1>
+
+		<a href="/account/logout">Logout</a>
+	</div>
+
+	<!-- Begin ReCharge code -->
+	<p><a href="/tools/recurring/login/">Manage Subscriptions</a></p>
+	<!-- End ReCharge code -->
+
+	<div class="flex-grid flex-grid--responsive">
+
+		<div class="flex-grid__item flex-grid__item--cols-7">
+		{% paginate customer.orders by 10 %}
+		<article class="table">
+
+			<h2 class="heading heading--h3">Your orders</h2>
+
+			{% if customer.orders.size != 0 %}
+
+			<table>
+				{% for order in customer.orders %}
+				<tr>
+					<td>{{ order.name | link_to: order.customer_url }}</td>
+					<td>{{ order.created_at | date: "%d %b %y" }}</td>
+					<td>{{ order.financial_status}}</td>
+					<td>{{ order.fulfillment_status }}</td>
+					<td>{{ order.total_price | money }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+
+			{% else %}
+			<p>You haven't placed any orders yet.</p>
+			{% endif %}
+
+		</article>
+		<!-- /.table -->
+		
+		{{ paginate | default_pagination }}
+		{% endpaginate %}	
+
+		</div>
+
+		<div class="flex-grid__item flex-grid__item--cols-3">
+
+			<article class="address">
+
+				<h2 class="heading heading--h3">Default Address</h2>
+
+				{% if customer.default_address %}
+					<p>{{ customer.default_address.address1 }}</p>
+					{% if customer.default_address.address2 != "" %}
+						<p>{{ customer.default_address.address2 }}</p>
+					{% endif %}
+					<p>{{ customer.default_address.city}}, {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}</p>
+					<p>{{ customer.default_address.zip }}</p>
+					<p>{{ customer.default_address.phone }}</p>
+				{% endif %}
+
+				<a href="/account/addresses">Edit addresses</a>
+
+			</article>
+			<!-- /.address -->
+
+		</div>
+
+	</div>
+	<!-- /.stack -->
+
+</div>
+<!-- /.section -->

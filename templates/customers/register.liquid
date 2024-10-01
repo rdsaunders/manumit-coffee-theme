@@ -1,0 +1,41 @@
+<!-- /templates/customers/register.liquid -->
+<div class="section">
+
+	{% form 'create_customer' %} 
+
+		<div class="stack login">
+
+			{{ form.errors | default_errors }}
+
+			<h1 class="heading heading--h2 text-center">Create account</h1>
+
+			<div class="form__row">
+				<label for="first_name" class="form__label">First Name</label>
+				<input type="text" value="" id="first_name" name="customer[first_name]" size="30" class="form__field" />
+			</div>
+
+			<div class="form__row">
+				<label for="last_name" class="form__label">Last Name</label>
+				<input type="text" value="" id="last_name" name="customer[last_name]" size="30" class="form__field" />
+			</div>
+
+			<div class="form__row">
+				<label for="email" class="form__label">Email Address</label>
+				<input type="email" value="" for="id" name="customer[email]" size="30" class="form__field" />
+			</div>
+
+			<div class="form__row">
+				<label for="password" class="form__label">Password</label>
+				<input type="password" value="" id="password" name="customer[password]" size="30" class="form__field" />
+			</div>
+
+			<button type="submit" class="btn btn--full">Create</button>
+
+			<p>Already have an account? <a href="/account/login">Login</a></p>
+
+		</div>
+
+	{% endform %} 
+
+</div>
+<!-- /.section -->

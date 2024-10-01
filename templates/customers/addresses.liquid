@@ -1,0 +1,145 @@
+<!-- /templates/customers/addresses.liquid -->
+<div class="section">
+
+	<div class="stack">
+
+	<h1 class="heading heading--h2">Your addresses</h1>
+
+	<div class="flex-grid flex-grid--responsive">
+
+		<div class="flex-grid__item flex-grid__item--cols-6">
+
+			<div class="flex-grid flex-grid--responsive">
+
+			{% for address in customer.addresses %}
+
+				<div class="flex-grid__item">
+
+					<article class="address">
+
+						<p>{{ address.first_name }} {{ address.last_name }}</p>
+						{% if address.company != "" %}
+							<p>{{ address.company }}</p>
+						{% endif %}
+						<p>{{ address.address1 }}</p>
+						{% if address.address2 != "" %}
+							<p>{{ address.address2 }}</p>
+						{% endif %}
+						<p>{{ address.city}}, {% if address.province_code %}{{ address.province_code }}, {% endif %}{{ address.country }}</p>
+						<p>{{ address.zip }}</p>
+						<p>{{ address.phone }}</p>
+
+						<form
+							class="address-delete-form"
+							method="post"
+							action="/account/addresses/{{ address.id }}"
+							data-confirm-message=""
+						>
+							<input type="hidden" name="_method" value="delete" />
+							<button type="submit" class="btn btn--danger">Delete</button>
+						</form>
+
+					</article>
+				
+				</div>
+
+			{% endfor %} 
+
+			</div>
+		
+		</div>
+
+		<div class="flex-grid__item flex-grid__item--cols-4">
+
+			<article class="form">
+
+				<h2 class="heading heading--h3">New address</h2>
+
+				{% form 'customer_address', customer.new_address, class: 'stack' %}	
+
+					<div data-address="root" class="form">
+
+						<div class="form__row">
+							<label class="form__label" for="firstname{{ address.id }}">First name</label>
+							<input id="firstname{{ address.id }}" type="text"	value="{{ form.first_name }}" name="address[first_name]" class="form__field" />
+						</div>
+
+						<div class="form__row">
+							<label class="form__label" for="lastname{{ address.id }}">Last name</label>
+							<input id="lastname{{ address.id }}" type="text" value="{{ form.last_name }}"	name="address[last_name]" class="form__field" />
+						</div>
+						
+						<div class="form__row">
+							<label class="form__label" for="company{{ address.id }}">Company</label>
+							<input id="company{{ address.id }}" type="text" value="{{ form.company }}"	name="address[company]" class="form__field" />
+						</div>
+						
+						<div class="form__row">
+							<label class="form__label" for="address1{{ address.id }}">Address 1</label>
+							<input id="address1{{ address.id }}" type="text" value="{{ form.address1}}"	name="address[address1]" class="form__field" />
+						</div>
+						
+						<div class="form__row">
+							<label class="form__label" for="address2{{ address.id }}">Address 2</label>
+							<input id="address2{{ address.id }}" type="text" value="{{ form.address2 }}"	name="address[address2]" class="form__field" />
+						</div>
+						
+						<div class="form__row">
+							<label class="form__label" for="city{{ address.id }}">City</label>
+							<input id="city{{ address.id }}" type="text" value="{{ form.city }}"	name="address[city]"  class="form__field" />
+						</div>
+						
+						<div class="form__row">
+							<label class="form__label" for="country{{ address.id }}">Country</label>
+							<select	id="country{{ address.id }}" name="address[country]" data-default="GB" class="form__field form__select"></select>
+						</div>
+
+						<div class="form__row">
+							<label class="form__label" for="province{{ address.id }}">Province</label>
+							<select	id="province{{ address.id }}" name="address[province]" data-default="{{ form.province }}" class="form__field form__select">
+							</select>
+						</div>
+
+						<div class="form__row">
+							<label class="form__label" for="postcode{{ address.id }}">Post Code</label>
+							<input id="postcode{{ address.id }}" type="text" value="{{ form.zip }}"	name="address[zip]"  autocapitalize="characters" class="form__field" />
+						</div>
+
+						<div class="form__row">
+							<label class="form__label" for="phone{{ address.id }}">Phone Number</label>
+							<input id="phone{{ address.id }}" type="tel" value="{{ form.phone }}"	name="address[phone]"  class="form__field" />
+						</div>
+
+					</div>
+
+					<button type="submit" class="btn">Add</button>
+
+				{% endform %}
+
+			</article>
+			<!-- /.stack -->
+
+		</div>
+
+	</div>
+
+	</div>
+
+</div>
+<!-- /.section -->
+
+<script>
+document.querySelectorAll('.address-delete-form').forEach(deleteForm => {
+	deleteForm.addEventListener('submit', event => {
+		const confirmMessage = event.target.getAttribute('data-confirm-message');
+		if (
+			!window.confirm(
+				confirmMessage || 'Are you sure you wish to delete this address?'
+			)
+		) {
+			event.preventDefault();
+		}
+	});
+});
+</script>
+

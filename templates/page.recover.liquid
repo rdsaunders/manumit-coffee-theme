@@ -1,0 +1,26 @@
+<!-- /templates/page.recover.liquid -->
+
+{% form 'recover_customer_password', class: 'form' %} 
+
+<div class="stack login">
+
+{{ form.errors | default_errors }}
+
+<h1 class="heading heading--h2 text-center">Recover your password</h1>
+
+<div class="form__row">
+
+	<label for="customer_email" class="form__label">Email Address</label>
+	<input type="email" name="customer[email]" class="form__field" />
+
+</div>
+
+<button type="submit" class="btn btn--full">Submit</button>
+
+<p>
+	<a href="/account/login">Back to login</a> or <a href="/account/register">Create an account</a>
+</p>
+
+</div>
+
+{% endform %} 

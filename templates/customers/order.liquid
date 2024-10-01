@@ -1,0 +1,75 @@
+<!-- /templates/customers/order.liquid -->
+
+<div class="section">
+
+	<div class="stack">
+
+	<h1 class="heading heading--h2">Order {{ order.name }}</h1>
+
+	<div class="flex-grid flex-grid--responsive">
+
+		<div class="flex-grid__item flex-grid__item--cols-7">
+
+			<article class="table">
+				<table>
+					{% for line_item in order.line_items %}
+					<tr>
+						<td>{{ line_item.title | link_to: line_item.product.url }}</td>
+						<td>{{ line_item.sku }}</td>
+						<td>{{ line_item.original_price | money }}</td>
+						<td>{{ line_item.quantity }}</td>
+						<td>{{ line_item.line_price | money }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</article>
+
+		</div> 
+
+		<div class="flex-grid__item flex-grid__item--cols-3">
+
+			{% if order.attributes %}
+				<p>Order notes:</p>
+				<ul>
+					{% for attribute in order.attributes %}
+						<li><strong>{{ attribute | first }}</strong>: {{ attribute | last }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+			
+			<article class="address">
+
+			<h2 class="heading heading--h4">Billing Address</h2>
+
+			<p><span>Payment Status:</span> <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></p>
+
+			<p>{{ order.billing_address.name }}</p>
+			<p>{{ order.billing_address.company }}</p>
+			<p>{{ order.billing_address.street }}</p>
+			<p>{{ order.billing_address.city }}, {{ order.billing_address.province }}</p>
+			<p>{{ order.billing_address.country }} {{ order.billing_address.zip }}</p>
+			<p>{{ order.billing_address.phone }}</p>
+
+			</article>
+
+			<article class="address">
+
+			<h2 class="heading heading--h4">Shipping Address</h2>
+
+			<p><span>Fulfillment Status:</span><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></p>
+			<p>{{ order.shipping_address.name }}</p>
+			<p>{{ order.shipping_address.company }}</p>
+			<p>{{ order.shipping_address.street }}</p>
+			<p>{{ order.shipping_address.city }}, {{ order.shipping_address.province }}</p>
+			<p>{{ order.shipping_address.country }} {{ order.shipping_address.zip }}</p>
+			<p>{{ order.shipping_address.phone }}</p>
+
+			</article>
+
+		</div>
+
+	</div>
+	<!-- /.stack -->
+
+</div>
+<!-- /.section -->

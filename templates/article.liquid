@@ -1,0 +1,33 @@
+{% capture author %}<strong>Manumit Team</strong>{% endcapture %}
+{% capture date %}<time datetime="{{ article.published_at | date: '%y-%m-%d' }}">{{ article.published_at | date: '%b %y' }}</time>{% endcapture %}
+
+<article class="section">
+
+	{% render 'text-hero' , title: article.title, content: article.excerpt %}
+
+	<div class="login stack section rte">
+
+		{% if blog.title == 'news' %} 
+
+		<p class="text-caps text-center byline">By {{ author }} - {{ date }}</p>
+
+		{% endif %}
+
+		{% if article.image %}
+			
+		<figure class="feature-img">
+			<img src="{{ article.image.src | img_url: '2048x2048' }}" alt="{{ article.image.alt }}" loading="lazy">
+		</figure>
+
+		{% endif %}
+
+		{{ article.content }}
+	
+	</div>
+
+</article>
+<!-- /.section -->
+
+{% section 'coffee-cta-block' %}
+
+{% section 'follow-block' %}

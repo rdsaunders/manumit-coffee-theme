@@ -1,0 +1,47 @@
+{% paginate blog.articles by 10 %}
+
+<div class="section">
+
+{% render 'text-hero' , title: blog.title, content: page_description %}
+
+<div class="stack section blog-list">
+
+	{% for article in blog.articles %}
+		<div class="flex-grid flex-grid--responsive" style="--modifier: calc(40em - 100%);">
+			{% if article.image %}
+			<figure class="flex-grid__item flex-grid__item--cols-2">
+				<img src="{{ article.image.src | img_url: 'medium' }}" alt="{{ article.img.alt }}" loading="lazy">
+			</figure>
+			{% endif %}
+			<div class="stack flex-grid__item flex-grid__item--cols-6">
+				<h2 class="heading heading--h3"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+				{% if blog.title == 'News' %}
+					<p class="byline text-caps">Manumit Team - {{ article.created_at | date: '%b %y' }}</p>
+				{% endif %}
+				<div>
+					{% if article.excerpt.size > 0 %}
+						{{ article.excerpt }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+
+</div>
+
+<nav class="pagination" aria-label="Pagination">
+	{% if paginate.pages > 1 %}
+		{% for part in paginate.parts %}
+				{% if part.is_link %}
+					{{ part.title | link_to: part.url }}
+				{% else %}
+					<span>{{ part.title }}</span>
+				{% endif %}
+			{% endfor %}
+	{% endif %}
+</nav>
+
+</div>
+<!-- /.section -->
+
+{% endpaginate %}

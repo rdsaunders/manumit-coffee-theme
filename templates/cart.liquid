@@ -1,0 +1,106 @@
+<!-- Begin ReCharge code -->
+{% include 'subscription-cart-footer' %}
+<!-- End ReCharge code -->
+
+<div class="cart">
+
+<div class="section">
+
+	<h1 class="heading heading--h2">Your Basket</h1>
+
+	{% if cart.item_count > 0 %}
+
+	<form action="/cart" method="post" novalidate>
+
+		<div class="flex-grid flex-grid--responsive" style="--margin : 2rem;">
+		
+			<div class="flex-grid__item flex-grid__item--cols-7">
+
+				<ul class="cart__items" style="--margin : 1rem;">
+
+					{% for item in cart.items %}
+					<li class="cart__item">
+
+						<div class="flex-grid flex-grid--fill">
+							<a href="{{ item.url | within: collections.all }}" class="flex-grid__item">
+								<img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" loading="lazy">
+							</a>
+
+							<div class="flex-grid__item flex-grid__item--cols-10 stack">
+
+								<div class="stack">
+									<p class="text-caps text-bold"><a href="{{ item.url }}" class="cart__item-title">{{ item.product.title }}</a></p>
+									<p>{{ item.variant.title }}</p>
+								</div>
+
+								<div class="flex-grid flex-grid--responsive flex-grid--v-center" style="--modifier: calc(10em - 100%);">
+
+									<div class="flex-grid__item flex-grid__item--cols-1 flex-grid__item--v-center">
+
+										<span class="heading heading--h4">{% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}{{ item.line_price | money }}</span>
+										{% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+									</div>
+									
+									<div class="flex-grid__item flex-grid__item--cols-1 flex-grid__item--v-center">
+										<div class="flex-grid flex-grid--v-center">
+											<label for="updates_{{ item.key }}" class="form__label text-caps">Qty</label>
+											<input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="form__field form__field--small">
+										</div>
+									</div>
+								</div>
+
+								<a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__item-remove">× Remove</a>
+
+								
+								
+							
+							</div>
+						</div>
+					
+					</li>
+					{% endfor %}
+
+				</ul>
+             
+
+			</div>
+
+			<div class="flex-grid__item flex-grid__item--cols-3">
+				
+				<div class="stack cart__summary"  style="--margin : 1rem;">
+					<div class="flex-grid flex-grid--responsive" style="--modifier: calc(10em - 100%);">
+
+						<div class="cart__subtotal flex-grid__item flex-grid__item--cols-1 stack" >
+							<p class="text-caps text-bold">Subtotal</p> 
+							<p class="heading heading--h3">{{ cart.total_price | money }}</p>
+						</div>
+						
+						<div class="flex-grid__item flex-grid__item--cols-1">
+							<p class="cart__delivery smallprint">Shipping & taxes calculated at checkout</p>
+						</div>
+					
+					</div>
+                  
+                   <div class="form__row">
+              			<label for="CartNote" class="form__label">{{ 'messages.cart.order_notes' | t }}</label>
+			  			<textarea name="note" id="CartNote" class="form__field form__field--textarea">{{ cart.note }}</textarea>
+              		</div>
+
+					<button type="submit" name="update" class="btn btn--full">Update basket</button>
+					<button type="submit" name="checkout" class="btn btn--primary btn--full">Checkout</button>
+				</div>
+			</div>
+		
+		</div>
+
+	</form>
+
+	{% else %}
+
+		<p>Your basket is empty</p>
+
+	{% endif %}
+
+	</div>
+
+</div>

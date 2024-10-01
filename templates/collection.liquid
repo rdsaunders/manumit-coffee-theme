@@ -1,0 +1,80 @@
+{% paginate collection.products by 24 %}
+  <div class="section">
+
+	{% render 'text-hero' , title: collection.title, content: collection.description %}
+
+	</div>
+
+	<div class="section">
+
+	<div class="grid-crop">
+
+		<div class="flex-grid flex-grid--responsive flex-grid--products">
+		{% for prod in collection.products %}
+			<div class="flex-grid__item">
+				<article class="product-card text-center stack">
+					<a href="{{ prod.url | within: collection }}">
+						<img src="{{ prod.featured_image.src | img_url: '352x' }}" alt="{{ prod.featured_image.alt | escape }}" loading="lazy">
+					</a>	
+					<h3  class="heading heading--h4"><a href="{{ prod.url | within: collection }}">{{ prod.title }}</a></h3>
+					{% if prod.available %}
+					<p>From {{ prod.price | money }}</p>
+					{% else %}
+					<p><strong class="text-caps">sold out</strong></p>
+					{% endif %}
+					
+				</article>
+			</div>
+		{% else %}
+			<p>no matches</p>
+		{% endfor %}
+
+		</div>
+
+		<nav class="pagination" aria-label="Pagination">
+		{% if paginate.pages > 1 %}
+			{% for part in paginate.parts %}
+					{% if part.is_link %}
+						{{ part.title | link_to: part.url }}
+					{% else %}
+						<span>{{ part.title }}</span>
+					{% endif %}
+				{% endfor %}
+		{% endif %}
+		</nav>
+
+	</div>
+{% endpaginate %}
+	
+	</div>
+
+	<div class="section section--alt full-bleed">
+
+		<div class="wrapper">
+
+			{% assign collHandle = collection.handle | downcase %}
+
+			{% case collHandle %}
+
+				{% when 'coffee' %}
+
+				{% section 'plans-cta-block' %}
+
+				{% when 'wholesale-coffee' %}
+
+				{% section 'wholesale-plans-cta-block' %}
+
+				{% when 'wholesale-coffee-plans' %}
+
+				{% section 'wholesale-coffee-cta-block' %}
+
+				{% else %}
+					
+				{% section 'coffee-cta-block' %}
+					
+			{% endcase %}
+
+		</div>
+
+	
+	</div>
