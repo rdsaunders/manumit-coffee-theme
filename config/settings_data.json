@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "infobar_active": true,
+    "infobar_active": false,
     "infobar_msg": "<p><strong>We are now closed for Christmas and will reopen on Friday 3rd January</strong>.</p><p><strong>Wishing all of our wonderful customers a blessed Christmas and a joy-filled new year!</strong></p>",
     "max_qty": 30,
     "low_stock_threshold": 15,
